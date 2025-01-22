@@ -1131,7 +1131,7 @@ def format_ips(url):
                     write_log(final_msg)
                 if is_posix():
                     write_log(
-                        "Received URL Error trying to download feed from '%s', Reason: %s" (urls, format(err)),1)
+                        "Received URL Error trying to download feed from '%s', Reason: %s" % (urls, format(err)),1)
 
     try:
         if is_windows():
