@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 #
 # simple remove banned ip
 #
@@ -10,10 +10,10 @@ try:
     ipaddress = sys.argv[1]
     if is_valid_ipv4(ipaddress):
         path = check_banlist_path()
-        fileopen = file(path, "r")
+        fileopen = open(path, "r")
         data = fileopen.read()
         data = data.replace(ipaddress + "\n", "")
-        filewrite = file(path, "w")
+        filewrite = open(path, "w")
         filewrite.write(data)
         filewrite.close()
 
