@@ -898,7 +898,7 @@ def syslog(message, alerttype):
             # Send syslog UDP packet to given host and port.
             sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             data = '<%d>%s' % (level + facility * 8, message + "\n")
-            sock.sendto(data, (host, port))
+            sock.sendto(data.encode(), (host, port))
             sock.close()
 
         # send the syslog message
@@ -906,8 +906,8 @@ def syslog(message, alerttype):
         remote_port = int(read_config("SYSLOG_REMOTE_PORT"))
         syslogmsg = message
         if alertindicator != "":
-            syslogmsg = "Artillery%s: %s" % (alertindicator, message)
-           #syslogmsg = "%s %s Artillery: %s" % (grab_time(), alertindicator, message) 
+        #syslogmsg = "Artillery%s: %s" % (alertindicator, message)
+            syslogmsg = "%s %s Artillery: %s" % (grab_time(), alertindicator, message) 
         syslog_send(syslogmsg, host=remote_syslog, port=remote_port)
 
     # if we are sending local syslog messages
