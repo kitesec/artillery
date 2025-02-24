@@ -859,8 +859,17 @@ def threat_server():
              #write_log("ThreatServer: Copy '%s' to '%s'" % (thisfile, public_http))
           time.sleep(300)
 
-# send the message then if its local or remote
 
+# attempt to resolve the hostname by querying DNS server and returns a str
+# configure local DNS /etc/resolv.conf
+def get_hostname(ip_address):
+    try:
+        hostname = socket.gethostbyaddr(ip_address)
+        return hostname[0]
+    except socket.herror:
+        return "Hostname not found"
+
+# send the message then if its local or remote
 
 def syslog(message, alerttype):
     type = read_config("SYSLOG_TYPE").lower()
